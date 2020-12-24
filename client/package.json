@@ -12,7 +12,7 @@
 		"react-scripts": "4.0.1",
 		"web-vitals": "^0.2.4"
 	},
-	"homepage": "https://syperhugeen.github.io/AppTestMELI/",
+	"homepage": "https://github.com/Syperhugeen/AppTestMELI",
 	"scripts": {
 		"start": "react-scripts start",
 		"build": "react-scripts build",
