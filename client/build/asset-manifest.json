@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/Syperhugeen/AppTestMELI/static/css/main.368bfd0f.chunk.css",
-    "main.js": "/Syperhugeen/AppTestMELI/static/js/main.15ff5856.chunk.js",
-    "main.js.map": "/Syperhugeen/AppTestMELI/static/js/main.15ff5856.chunk.js.map",
-    "runtime-main.js": "/Syperhugeen/AppTestMELI/static/js/runtime-main.9332afb4.js",
-    "runtime-main.js.map": "/Syperhugeen/AppTestMELI/static/js/runtime-main.9332afb4.js.map",
-    "static/js/2.1301a5f3.chunk.js": "/Syperhugeen/AppTestMELI/static/js/2.1301a5f3.chunk.js",
-    "static/js/2.1301a5f3.chunk.js.map": "/Syperhugeen/AppTestMELI/static/js/2.1301a5f3.chunk.js.map",
-    "static/js/3.85015455.chunk.js": "/Syperhugeen/AppTestMELI/static/js/3.85015455.chunk.js",
-    "static/js/3.85015455.chunk.js.map": "/Syperhugeen/AppTestMELI/static/js/3.85015455.chunk.js.map",
-    "index.html": "/Syperhugeen/AppTestMELI/index.html",
-    "static/css/main.368bfd0f.chunk.css.map": "/Syperhugeen/AppTestMELI/static/css/main.368bfd0f.chunk.css.map",
-    "static/js/2.1301a5f3.chunk.js.LICENSE.txt": "/Syperhugeen/AppTestMELI/static/js/2.1301a5f3.chunk.js.LICENSE.txt"
+    "main.css": "/AppTestMELI/static/css/main.368bfd0f.chunk.css",
+    "main.js": "/AppTestMELI/static/js/main.15ff5856.chunk.js",
+    "main.js.map": "/AppTestMELI/static/js/main.15ff5856.chunk.js.map",
+    "runtime-main.js": "/AppTestMELI/static/js/runtime-main.c170f058.js",
+    "runtime-main.js.map": "/AppTestMELI/static/js/runtime-main.c170f058.js.map",
+    "static/js/2.1301a5f3.chunk.js": "/AppTestMELI/static/js/2.1301a5f3.chunk.js",
+    "static/js/2.1301a5f3.chunk.js.map": "/AppTestMELI/static/js/2.1301a5f3.chunk.js.map",
+    "static/js/3.85015455.chunk.js": "/AppTestMELI/static/js/3.85015455.chunk.js",
+    "static/js/3.85015455.chunk.js.map": "/AppTestMELI/static/js/3.85015455.chunk.js.map",
+    "index.html": "/AppTestMELI/index.html",
+    "static/css/main.368bfd0f.chunk.css.map": "/AppTestMELI/static/css/main.368bfd0f.chunk.css.map",
+    "static/js/2.1301a5f3.chunk.js.LICENSE.txt": "/AppTestMELI/static/js/2.1301a5f3.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.9332afb4.js",
+    "static/js/runtime-main.c170f058.js",
     "static/js/2.1301a5f3.chunk.js",
     "static/css/main.368bfd0f.chunk.css",
     "static/js/main.15ff5856.chunk.js"
