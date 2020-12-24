@@ -1,0 +1,10 @@
+$body-bg: #000;
+$body-color: #111;
+
+// Our Custom sass code
+$theme-colors: (
+	"primary": yellow,
+	"danger": coral,
+);
+
+@import "./scss/bootstrap.scss";
