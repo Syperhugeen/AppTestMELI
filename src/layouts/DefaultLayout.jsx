@@ -1,11 +1,18 @@
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 /**
  * El formato más usado para mostrar las vistas que inlcuye nav y footer
  */
 const defaultLayout = (props) => {
 	return (
 		<div>
-			<p className="text-white p-5 text-center">Hola</p>
-			{props.children}
+			<Header />
+
+			<div className="w-100 d-flex flex-column align-items-center">
+				{props.children}
+			</div>
+
+			<Footer />
 		</div>
 	);
 };

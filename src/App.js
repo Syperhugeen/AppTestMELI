@@ -1,12 +1,14 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import "./assets/css/Boostrap/customBoostrap.scss";
+import "./assets/css/boostrap/customBoostrap.scss";
 import Home from "./pages/Home";
+import ResultadosDeBusqueda from "./pages/ResultadoDeBusqueda";
 
 const App = () => {
 	return (
 		<BrowserRouter>
 			<Switch>
-				<Route path="/" component={Home} />
+				<Route exact path="/" component={Home} />
+				<Route path="/items/search/:query" component={ResultadosDeBusqueda} />
 			</Switch>
 		</BrowserRouter>
 	);

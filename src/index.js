@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import "./assets/css/Boostrap/customBoostrap.scss";
+import "./assets/css/boostrap/customBoostrap.scss";
 
 import reportWebVitals from "./reportWebVitals";
 

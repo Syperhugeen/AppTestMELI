@@ -1,0 +1,20 @@
+@import "../templateDeColores/mercadoLibreColorPaletaDefault.scss";
+$IIMAGEN_TAMAÑO: 150px;
+
+.item-lista-contenedor {
+	border-bottom: solid 1px $MELI-BLANCO;
+}
+
+.item-lista-precio {
+	font-size: 24px;
+}
+
+.item-lista-title {
+	font-size: 18px;
+}
+
+.item-lista-img {
+	width: $IIMAGEN_TAMAÑO;
+	height: $IIMAGEN_TAMAÑO;
+	object-fit: cover;
+}
