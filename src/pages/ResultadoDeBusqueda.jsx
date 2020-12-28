@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
-import DefaultLayout from "../layouts/DefaultLayout";
-import ItemLista from "../components/ItemLista";
-import urlApiMeliPath from "../config/config";
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import DefaultLayout from '../layouts/DefaultLayout';
+import ItemLista from '../components/ItemLista';
+import urlApiMeliPath from '../config/config';
+import { useParams } from 'react-router-dom';
 
-import "../assets/css/pages/resultadoDeBusqeda.scss";
+import '../assets/css/pages/resultadoDeBusqeda.scss';
 
 const ResultadoDeBusqueda = () => {
 	// Q U E R Y
@@ -26,10 +27,10 @@ const ResultadoDeBusqueda = () => {
 	};
 
 	const setUrlRequest = () => {
-		return `${urlApiMeliPath.pathBusqueda}${query}${setParametroUrl(
-			"limit",
-			CantidadAPedir
-		)}${setParametroUrl("offset", offset)}`;
+		return `${urlApiMeliPath.pathBusqueda}${query}${setParametroUrl('limit', CantidadAPedir)}${setParametroUrl(
+			'offset',
+			offset
+		)}`;
 	};
 
 	// H O O K S
@@ -97,11 +98,24 @@ const ResultadoDeBusqueda = () => {
 					</div>
 				)}
 
-				<div onClick={fetchItems} className="btn">
-					Cargas más
-				</div>
+				{!loading && (
+					<div onClick={fetchItems} className="btn">
+						Cargas más
+					</div>
+				)}
 
-				{loading && <p>Loading...</p>}
+				{loading && (
+					<SkeletonTheme>
+						<div className="w-100 row alig-items-center py-2">
+							<div className="col-2 d-flex flex-column align-items-center justify-content-center">
+								<Skeleton circle={true} height={70} width={70} />
+							</div>
+							<p className="col-10">
+								<Skeleton count={3} />
+							</p>
+						</div>
+					</SkeletonTheme>
+				)}
 			</div>
 		</DefaultLayout>
 	);
