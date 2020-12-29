@@ -1,17 +1,16 @@
-import React, { useState, useEffect, useRef } from "react";
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
-import DefaultLayout from "../layouts/DefaultLayout";
-import ItemLista from "../components/ItemLista";
-import urlApiMeliPath from "../config/config";
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import DefaultLayout from '../layouts/DefaultLayout';
+import ItemLista from '../components/ItemLista';
+import urlApiMeliPath from '../config/config';
+import { useParams } from 'react-router-dom';
+import Axios from 'axios';
 
-import "../assets/css/pages/resultadoDeBusqeda.scss";
+import '../assets/css/pages/resultadoDeBusqeda.scss';
 
 const ResultadoDeBusqueda = () => {
-	const prevScrollY = useRef(0);
-	const [goingDown, setGoingDown] = useState(false);
 	// Q U E R Y
-	const query = useParams().query.replace(/-/g, " "); //SEO detalle
+	const query = useParams().query.replace(/-/g, ' '); //SEO detalle
 
 	const CantidadAPedir = 10;
 
@@ -32,14 +31,6 @@ const ResultadoDeBusqueda = () => {
 		}
 	};
 
-	const clearAlCambiarLaQuery = () => {
-		setOffset(0);
-		setCantidadDePeticiones(0);
-		setSePuedePedirResultados(true);
-		setError(null);
-		setErrorBool(false);
-	};
-
 	const setUrlRequest = () => {
 		let posicionOffser = 0;
 		if (query == queryAnterior) {
@@ -47,26 +38,31 @@ const ResultadoDeBusqueda = () => {
 		} else {
 			posicionOffser = 0;
 		}
-		return `${urlApiMeliPath.pathBusqueda}${query}${setParametroUrl(
-			"limit",
-			CantidadAPedir
-		)}${setParametroUrl("offset", posicionOffser)}`;
-	};
+		const data = {
+			items: `${urlApiMeliPath.pathBusqueda}${query}${setParametroUrl('limit', CantidadAPedir)}${setParametroUrl(
+				'offset',
+				posicionOffser
+			)}`,
+			categorias: `https://api.mercadolibre.com/sites/MLA/domain_discovery/search?q=${query}${setParametroUrl(
+				'limit',
+				4
+			)}`
+		};
 
-	const handerScroll = () => {
-		console.log("scroll");
+		return data;
 	};
 
 	// H O O K S
 	const [queryAnterior, setQueryAnterior] = useState(query);
 	const [sePuedePedirResultados, setSePuedePedirResultados] = useState(true);
 	const [offset, setOffset] = useState(0); // Posición de la paginación de los resultados
-	const [loading, setLoading] = useState(false);
-	const [cantidadDePeticiones, setCantidadDePeticiones] = useState(0);
+	const [loading, setLoading] = useState(true);
+
 	const [error, setError] = useState(null);
 	const [errorBool, setErrorBool] = useState(false);
 	const [items, setItems] = useState([]);
 	const [categorias, setCategorias] = useState([]);
+	const [loadingCategoria, setLoadingCategoria] = useState(false);
 
 	// R E Q U E S T
 
@@ -75,125 +71,107 @@ const ResultadoDeBusqueda = () => {
 	};
 
 	const fetchCategorias = () => {
-		alert(`et ${offset}`);
+		const url = setUrlRequest().categorias;
+		console.log(setUrlRequest());
+
+		setLoadingCategoria(true);
+
+		console.log(url);
+		Axios.get(url)
+			.then(function (response) {
+				let data = response.data;
+				setCategorias(data);
+				setLoadingCategoria(false);
+			})
+			.catch(function (error) {
+				setLoadingCategoria(false);
+				setErrorBool(true);
+				setError(error.error);
+			});
 	};
 
-	const fetchItems = async () => {
-		var url = setUrlRequest();
+	const fetchItems = () => {
+		const url = setUrlRequest();
+		setLoading(true);
 
-		try {
-			setLoading(true);
-			const response = await fetch(url);
-			const data = await response.json();
+		Axios.get(url.items)
+			.then(function (response) {
+				let data = response.data;
 
-			if (query == queryAnterior) {
-				setItems(items.concat(data.results));
-			} else {
-				setItems(data.results);
-			}
+				if (query == queryAnterior) {
+					setItems(items.concat(data.results));
+				} else {
+					setItems(data.results);
+				}
 
-			validarPedirMas(data.paging);
+				validarPedirMas(data.paging);
 
-			setQueryAnterior(query); // -> Mejorar
+				setQueryAnterior(query); // -> Mejorar
 
-			setLoading(false);
-		} catch (error) {
-			setLoading(false);
-			setErrorBool(true);
-			setError(error);
-		}
+				setLoading(false);
+			})
+			.catch(function (error) {
+				setLoading(false);
+				setErrorBool(true);
+				setError(error);
+			});
 	};
 
 	useEffect(() => {
 		document.title = `${query}  Mercado libre`;
-
+		fetchCategorias();
 		fetchItems();
 	}, [query]);
-
-	useEffect(() => {
-		const handleScroll = () => {
-			console.log(loading);
-			if (loading) {
-				return "";
-			}
-
-			const currentScrollY = window.scrollY;
-			if (prevScrollY.current > currentScrollY && goingDown) {
-				setGoingDown(false);
-			}
-			if (prevScrollY.current < currentScrollY && !goingDown) {
-				setGoingDown(true);
-			}
-
-			let scroll_top = document.documentElement.scrollTop;
-
-			const bodyRect = document.body.getBoundingClientRect();
-
-			const elemRect1 = document
-				.getElementById("cargarOnScroll")
-				.getBoundingClientRect();
-			const offset1 = elemRect1.top - bodyRect.top;
-
-			let bottomOfWindow = currentScrollY + window.innerHeight + 50 >= offset1;
-			if (bottomOfWindow) {
-				if (!loading) {
-					fetchItems();
-					window.removeEventListener("scroll", handleScroll);
-				} else {
-					window.addEventListener("scroll", handleScroll, { passive: true });
-				}
-			}
-
-			prevScrollY.current = currentScrollY;
-		};
-
-		window.addEventListener("scroll", handleScroll, { passive: true });
-
-		return () => window.removeEventListener("scroll", handleScroll);
-	}, [goingDown]);
 
 	return (
 		<DefaultLayout>
 			<div className="container d-flex flex-column align-items-center">
-				<div>Cargas más offset {offset}</div>
+				<div className="col col-lg-10">
+					{loadingCategoria && <Skeleton count={1} />}
+					{categorias.length > 0 && !loadingCategoria && (
+						<div className="my-2">
+							{categorias.map((categoria) => {
+								return <span className="mr-3">{categoria.category_name}</span>;
+							})}
+						</div>
+					)}
+				</div>
 				<div className="col col-lg-10  bg-white">
 					{errorBool && <p>`Error: ${error}`</p>}
 					{items.length > 0 && (
-						<div className="mb-4">
+						<div className="">
 							{items.map((item) => {
 								return <ItemLista item={item} key={item.id} />;
 							})}
 						</div>
 					)}
 
-					{items.length <= 0 && cantidadDePeticiones == 1 && (
+					{items.length <= 0 && offset == 0 && (
 						<div className="h3 py-5 text-center">
-							Para encontrar algún producto mejorá la búsqueda acortando la
-							frase 😉
+							Para encontrar algún producto mejorá la búsqueda acortando la frase 😉
 						</div>
 					)}
-
-					{!loading && (
-						<div onClick={cargarMasItems} className="btn">
-							Cargas más offset {offset}
-						</div>
-					)}
-
 					<div id="cargarOnScroll"></div>
-
-					{loading && (
-						<SkeletonTheme>
+				</div>
+				{loading && (
+					<div className="col-10">
+						<SkeletonTheme count={2}>
 							<div className="w-100 row alig-items-center py-2">
 								<div className="col-2 d-flex flex-column align-items-center justify-content-center">
 									<Skeleton circle={true} height={70} width={70} />
 								</div>
 								<p className="col-10">
-									<Skeleton count={3} />
+									<Skeleton count={5} />
 								</p>
 							</div>
 						</SkeletonTheme>
-					)}
-				</div>
+					</div>
+				)}
+				{!loading && (
+					<button onClick={cargarMasItems} className="btn btn-secondary btn-lg my-5">
+						Cargar más resultados
+					</button>
+				)}
 			</div>
 		</DefaultLayout>
 	);

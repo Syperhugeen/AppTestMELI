@@ -1,22 +1,22 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
-import "../../assets/css/layouts/components/Buscador.scss";
-import LupaX1 from "../../assets/Imagenes/Corporativas/ic_Search.png";
+import '../../assets/css/layouts/components/Buscador.scss';
+import LupaX1 from '../../assets/Imagenes/Corporativas/ic_Search.png';
 
 const Buscador = (props) => {
-	const [query, setQuery] = useState("");
+	const [query, setQuery] = useState('');
 
-	const path = `/items/search/${query.toLowerCase().replace(/ /g, "-")}`;
+	const path = `/items/search/${query.toLowerCase().replace(/ /g, '-')}`;
 
 	let history = useHistory();
 
 	const onClickBuscar = () => {
 		const location = {
 			pathname: path,
-			state: { offset: 0 },
+			state: { offset: 0 }
 		};
-		if (query != "") {
+		if (query != '') {
 			history.push(location);
 		} else {
 		}

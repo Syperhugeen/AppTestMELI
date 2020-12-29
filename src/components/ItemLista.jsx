@@ -8,7 +8,7 @@ const ItemLista = (props) => {
 	const isFreeShipping = item.shipping.free_shipping ? true : false;
 
 	return (
-		<div className="p-0 col-12 mb-2 d-flex flex-row align-items-center  item-lista-contenedor">
+		<div className="p-0 col-12 d-flex flex-row align-items-center  item-lista-contenedor">
 			<div className="d-flex flex-row align-items-center justify-content-center">
 				<img src={item.thumbnail} alt={`Foto de ${item.title}`} className="item-lista-img" />
 			</div>

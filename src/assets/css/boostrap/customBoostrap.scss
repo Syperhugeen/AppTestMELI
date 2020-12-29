@@ -4,15 +4,18 @@
 * 
 **/
 
-@import "../templateDeColores/mercadoLibreColorPaletaDefault.scss";
+@import '../templateDeColores/mercadoLibreColorPaletaDefault.scss';
 
 $body-bg: $MELI-BLANCO;
 $body-color: #111;
 
 // Our Custom sass code
+
 $theme-colors: (
-	"primary": $MELI-AMARILLO,
-	"danger": coral,
+	'primary': $MELI-AMARILLO,
+	'secondary': $MELI-AZUL,
+	'light': lighten($MELI-AZUL, 20%),
+	'dark': darken($MELI-AZUL, 20%)
 );
 
 $grid-breakpoints: (
@@ -20,17 +23,17 @@ $grid-breakpoints: (
 	sm: 576px,
 	md: 768px,
 	lg: 992px,
-	xl: 1200px,
+	xl: 1200px
 ) !default;
 
 $container-max-widths: (
 	sm: 540px,
 	md: 720px,
 	lg: 960px,
-	xl: 1400px,
+	xl: 1400px
 ) !default;
 
 $grid-gutter-width: 15px !default;
 $grid-row-columns: 6 !default;
 
-@import "./scss/bootstrap.scss";
+@import './scss/bootstrap.scss';
