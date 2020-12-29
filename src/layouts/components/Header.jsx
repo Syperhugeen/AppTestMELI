@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 import "../../assets/css/layouts/components/Header.scss";
 import logoX1 from "../../assets/Imagenes/Corporativas/Logo_ML.png";
@@ -18,11 +19,13 @@ const Header = (props) => {
 			<div className="container d-flex flex-column align-items-center">
 				<div className="col col-lg-10 row mx-0 ">
 					<div className="col-2  col-lg-1 d-flex flex-column align-items-center justify-content-center px-1">
-						<img
-							src={width > breakpoint ? logoX2 : logoX1}
-							className="header-logo img-fluid "
-							alt="Logo de Mercado Libre"
-						/>
+						<Link to="/">
+							<img
+								src={width > breakpoint ? logoX2 : logoX1}
+								className="header-logo img-fluid "
+								alt="Logo de Mercado Libre"
+							/>
+						</Link>
 					</div>
 					<Buscador />
 				</div>

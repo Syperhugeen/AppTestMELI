@@ -8,7 +8,11 @@ const App = () => {
 		<BrowserRouter>
 			<Switch>
 				<Route exact path="/" component={Home} />
-				<Route path="/items/search/:query" component={ResultadosDeBusqueda} />
+				<Route
+					exact
+					path="/items/search/:query"
+					component={ResultadosDeBusqueda}
+				/>
 			</Switch>
 		</BrowserRouter>
 	);

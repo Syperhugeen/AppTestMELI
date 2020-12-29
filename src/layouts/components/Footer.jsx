@@ -1,5 +1,5 @@
 const Footer = (props) => {
-	return <footer className="text-white">Footer sdfsdfsdf</footer>;
+	return <footer className="text-white"></footer>;
 };
 
 export default Footer;

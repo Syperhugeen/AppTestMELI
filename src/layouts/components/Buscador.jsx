@@ -7,13 +7,17 @@ import LupaX1 from "../../assets/Imagenes/Corporativas/ic_Search.png";
 const Buscador = (props) => {
 	const [query, setQuery] = useState("");
 
-	const path = `/items/search/${query}`;
+	const path = `/items/search/${query.toLowerCase().replace(/ /g, "-")}`;
 
 	let history = useHistory();
 
 	const onClickBuscar = () => {
+		const location = {
+			pathname: path,
+			state: { offset: 0 },
+		};
 		if (query != "") {
-			history.push(path);
+			history.push(location);
 		} else {
 		}
 	};
