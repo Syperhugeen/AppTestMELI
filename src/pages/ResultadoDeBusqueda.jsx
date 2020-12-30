@@ -3,7 +3,7 @@ import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import DefaultLayout from "../layouts/DefaultLayout";
 import ItemLista from "../components/ItemLista";
 import urlApiMeliPath from "../config/config";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import Axios from "axios";
 
 import "../assets/css/pages/resultadoDeBusqeda.scss";
@@ -81,7 +81,7 @@ const ResultadoDeBusqueda = () => {
 
 			setLoadingCategoria(true);
 
-			Axios.get(url)
+			return Axios.get(url)
 				.then(function (response) {
 					let data = response.data;
 					setCategoriaPrincipal(data);
@@ -100,7 +100,7 @@ const ResultadoDeBusqueda = () => {
 
 		setLoadingCategoria(true);
 
-		Axios.get(url)
+		return Axios.get(url)
 			.then(function (response) {
 				let data = response.data;
 				setCategorias(data);
@@ -119,7 +119,7 @@ const ResultadoDeBusqueda = () => {
 		const url = setUrlRequest();
 		setLoading(true);
 
-		Axios.get(url.items)
+		return Axios.get(url.items)
 			.then(function (response) {
 				let data = response.data;
 
@@ -143,9 +143,16 @@ const ResultadoDeBusqueda = () => {
 	};
 
 	useEffect(() => {
-		document.title = `${query}  Mercado libre`;
 		fetchCategorias();
-		fetchItems();
+		fetchItems().then(function () {
+			document.title = `${query}  Mercado Libre`;
+			document
+				.querySelector('meta[name="description"]')
+				.setAttribute(
+					"content",
+					`¿Buscás ${query}? Encontralo al mejor precio en Mercado Libre`
+				);
+		});
 	}, [query]);
 
 	return (
@@ -160,7 +167,15 @@ const ResultadoDeBusqueda = () => {
 								return (
 									<span>
 										<span key={categoria.id} className="mr-2">
-											{categoria.name}
+											<Link
+												className="BreadcrumContainer-a"
+												to={`/categoria/${categoria.name
+													.toLowerCase()
+													.replace(/,/g, "")
+													.replace(/ /g, "-")}/${categoria.id}`}
+											>
+												{categoria.name}
+											</Link>
 										</span>
 										<span className="mr-2"> > </span>
 									</span>

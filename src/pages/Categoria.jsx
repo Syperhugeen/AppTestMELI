@@ -3,14 +3,14 @@ import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import DefaultLayout from "../layouts/DefaultLayout";
 import ItemLista from "../components/ItemLista";
 import urlApiMeliPath from "../config/config";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import Axios from "axios";
 
 import "../assets/css/pages/resultadoDeBusqeda.scss";
 
-const ResultadoDeBusqueda = () => {
+const Categoria = () => {
 	// Q U E R Y
-	const query = useParams().query.replace(/-/g, " "); //SEO detalle
+	const categoriaId = useParams().categoria_id.replace(/-/g, " "); //SEO detalle
 
 	const CantidadAPedir = 10;
 
@@ -33,27 +33,26 @@ const ResultadoDeBusqueda = () => {
 
 	const setUrlRequest = () => {
 		let posicionOffser = 0;
-		if (query == queryAnterior) {
+		if (categoriaId == categoriaIdAnterior) {
 			posicionOffser = items.length;
 		} else {
 			posicionOffser = 0;
 		}
 		const data = {
-			items: `${urlApiMeliPath.pathBusqueda}${query}${setParametroUrl(
+			items: `${
+				urlApiMeliPath.pathItemsDeCategoria
+			}${categoriaId}${setParametroUrl(
 				"limit",
 				CantidadAPedir
 			)}${setParametroUrl("offset", posicionOffser)}`,
-			categorias: `https://api.mercadolibre.com/sites/MLA/domain_discovery/search?q=${query}${setParametroUrl(
-				"limit",
-				4
-			)}`,
+			categoria: `${urlApiMeliPath.pathCategoriaEspecifica}${categoriaId}`,
 		};
 
 		return data;
 	};
 
 	// H O O K S
-	const [queryAnterior, setQueryAnterior] = useState(query);
+	const [categoriaIdAnterior, setCategoriaIdAnterior] = useState(categoriaId);
 	const [sePuedePedirResultados, setSePuedePedirResultados] = useState(true);
 	const [offset, setOffset] = useState(0); // Posición de la paginación de los resultados
 	const [loading, setLoading] = useState(true);
@@ -61,7 +60,8 @@ const ResultadoDeBusqueda = () => {
 	const [error, setError] = useState(null);
 	const [errorBool, setErrorBool] = useState(false);
 	const [items, setItems] = useState([]);
-	const [categorias, setCategorias] = useState([]);
+	const [categoria, setCategoria] = useState(false);
+
 	const [loadingCategoria, setLoadingCategoria] = useState(false);
 
 	// R E Q U E S T
@@ -70,17 +70,18 @@ const ResultadoDeBusqueda = () => {
 		fetchItems();
 	};
 
-	const fetchCategorias = () => {
-		const url = setUrlRequest().categorias;
-		console.log(setUrlRequest());
+	const fetchCategoriaPrincipal = () => {
+		const url = `${setUrlRequest().categoria}`;
 
 		setLoadingCategoria(true);
 
-		console.log(url);
-		Axios.get(url)
+		return Axios.get(url)
 			.then(function (response) {
 				let data = response.data;
-				setCategorias(data);
+				setCategoria(data);
+				fetchItems().then(function () {
+					console.log("se piden items");
+				});
 				setLoadingCategoria(false);
 			})
 			.catch(function (error) {
@@ -94,11 +95,11 @@ const ResultadoDeBusqueda = () => {
 		const url = setUrlRequest();
 		setLoading(true);
 
-		Axios.get(url.items)
+		return Axios.get(url.items)
 			.then(function (response) {
 				let data = response.data;
 
-				if (query == queryAnterior) {
+				if (categoriaId == categoriaIdAnterior) {
 					setItems(items.concat(data.results));
 				} else {
 					setItems(data.results);
@@ -106,7 +107,7 @@ const ResultadoDeBusqueda = () => {
 
 				validarPedirMas(data.paging);
 
-				setQueryAnterior(query); // -> Mejorar
+				setCategoriaIdAnterior(categoriaId); // -> Mejorar
 
 				setLoading(false);
 			})
@@ -118,21 +119,39 @@ const ResultadoDeBusqueda = () => {
 	};
 
 	useEffect(() => {
-		document.title = `${query}  Mercado libre`;
-		fetchCategorias();
-		fetchItems();
-	}, [query]);
+		fetchCategoriaPrincipal().then(function () {
+			document.title = `${categoria.name}  Mercado libre`;
+		});
+	}, [categoriaId]);
 
 	return (
 		<DefaultLayout>
 			<div className="container d-flex flex-column align-items-center">
 				<div className="col col-lg-10">
 					{loadingCategoria && <Skeleton count={1} />}
-					{categorias.length > 0 && !loadingCategoria && (
-						<div className="my-2">
-							{categorias.map((categoria) => {
-								return <span className="mr-3">{categoria.category_name}</span>;
-							})}
+					{categoria !== false && !loadingCategoria && (
+						<div>
+							<div className="BreadcrumContainer">
+								{categoria.path_from_root.map((categoria) => {
+									return (
+										<span>
+											<span key={categoria.id} className="mr-2">
+												<Link
+													className="BreadcrumContainer-a"
+													to={`/categoria/${categoria.name
+														.toLowerCase()
+														.replace(/,/g, "")
+														.replace(/ /g, "-")}/${categoria.id}`}
+												>
+													{categoria.name}
+												</Link>
+											</span>
+											<span className="mr-2"> > </span>
+										</span>
+									);
+								})}
+							</div>
+							<h1 className="h3 BreadcrumContainer-titulo">{categoria.name}</h1>
 						</div>
 					)}
 				</div>
@@ -182,4 +201,4 @@ const ResultadoDeBusqueda = () => {
 	);
 };
 
-export default ResultadoDeBusqueda;
+export default Categoria;

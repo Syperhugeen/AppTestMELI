@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
 import "../../assets/css/layouts/components/Buscador.scss";
@@ -22,6 +22,20 @@ const Buscador = (props) => {
 		}
 	};
 
+	const handleKeyDown = (e) => {
+		if (e.key === "Enter") {
+			onClickBuscar();
+		}
+	};
+
+	useEffect(() => {
+		window.addEventListener("keyup", handleKeyDown);
+
+		return () => {
+			window.removeEventListener("keyup", handleKeyDown);
+		};
+	}, [query]);
+
 	return (
 		<div className="col-9 col-lg-10 d-flex flex-row align-items-center">
 			<input
@@ -31,7 +45,12 @@ const Buscador = (props) => {
 				onChange={(e) => setQuery(e.target.value)}
 				placeholder="Buscar productos, marcas y más..."
 			/>
-			<button onClick={onClickBuscar} className="buscador-boton" type="submit">
+			<button
+				onKeyDown={handleKeyDown}
+				onClick={onClickBuscar}
+				className="buscador-boton"
+				type="submit"
+			>
 				<img src={LupaX1} alt="Icono del buscador. Es una lupa. " />
 			</button>
 		</div>
