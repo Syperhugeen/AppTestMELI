@@ -41,6 +41,13 @@
   # Rewrite all requests to the root
   RewriteRule ^(.*) /
 
+     RewriteEngine On  
+  RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -f [OR]
+  RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -d
+  RewriteRule ^ - [L]
+
+  RewriteRule ^ /index.html [L]
+
 </ifModule>
 
 <IfModule mod_headers.c>
