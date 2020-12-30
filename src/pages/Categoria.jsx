@@ -7,7 +7,6 @@ import { useParams } from "react-router-dom";
 import Axios from "axios";
 
 import "../assets/css/pages/resultadoDeBusqeda.scss";
-import "../assets/css/layouts/components/Breadcrumb.scss";
 
 const ResultadoDeBusqueda = () => {
 	// Q U E R Y
@@ -22,7 +21,7 @@ const ResultadoDeBusqueda = () => {
 
 	const validarPedirMas = (paging) => {
 		if (items.length + CantidadAPedir < paging.primary_results) {
-			if (items.length === 0) {
+			if (items.length == 0) {
 				setOffset(CantidadAPedir);
 			} else {
 				setOffset(CantidadAPedir + offset);
@@ -34,7 +33,7 @@ const ResultadoDeBusqueda = () => {
 
 	const setUrlRequest = () => {
 		let posicionOffser = 0;
-		if (query === queryAnterior) {
+		if (query == queryAnterior) {
 			posicionOffser = items.length;
 		} else {
 			posicionOffser = 0;
@@ -44,10 +43,10 @@ const ResultadoDeBusqueda = () => {
 				"limit",
 				CantidadAPedir
 			)}${setParametroUrl("offset", posicionOffser)}`,
-			categorias: `${
-				urlApiMeliPath.pathCategoriasAlBusqueda
-			}${query}${setParametroUrl("limit", 4)}`,
-			categoriaPrincipal: `${urlApiMeliPath.pathCategoriaEspecifica}`,
+			categorias: `https://api.mercadolibre.com/sites/MLA/domain_discovery/search?q=${query}${setParametroUrl(
+				"limit",
+				4
+			)}`,
 		};
 
 		return data;
@@ -63,8 +62,6 @@ const ResultadoDeBusqueda = () => {
 	const [errorBool, setErrorBool] = useState(false);
 	const [items, setItems] = useState([]);
 	const [categorias, setCategorias] = useState([]);
-	const [categoriasMenosLaPrimera, setCategoriasMenosLaPrimera] = useState([]);
-	const [categoriaPrincipal, setCategoriaPrincipal] = useState(false);
 	const [loadingCategoria, setLoadingCategoria] = useState(false);
 
 	// R E Q U E S T
@@ -73,40 +70,18 @@ const ResultadoDeBusqueda = () => {
 		fetchItems();
 	};
 
-	const fetchCategoriaPrincipal = (categoria) => {
-		if (categoria) {
-			const url = `${setUrlRequest().categoriaPrincipal}${
-				categoria.category_id
-			}`;
-
-			setLoadingCategoria(true);
-
-			Axios.get(url)
-				.then(function (response) {
-					let data = response.data;
-					setCategoriaPrincipal(data);
-					setLoadingCategoria(false);
-				})
-				.catch(function (error) {
-					setLoadingCategoria(false);
-					setErrorBool(true);
-					setError(error.error);
-				});
-		}
-	};
-
 	const fetchCategorias = () => {
 		const url = setUrlRequest().categorias;
+		console.log(setUrlRequest());
 
 		setLoadingCategoria(true);
 
+		console.log(url);
 		Axios.get(url)
 			.then(function (response) {
 				let data = response.data;
 				setCategorias(data);
 				setLoadingCategoria(false);
-				fetchCategoriaPrincipal(data[0]);
-				setCategoriasMenosLaPrimera(data.shift());
 			})
 			.catch(function (error) {
 				setLoadingCategoria(false);
@@ -123,7 +98,7 @@ const ResultadoDeBusqueda = () => {
 			.then(function (response) {
 				let data = response.data;
 
-				if (query === queryAnterior) {
+				if (query == queryAnterior) {
 					setItems(items.concat(data.results));
 				} else {
 					setItems(data.results);
@@ -152,22 +127,12 @@ const ResultadoDeBusqueda = () => {
 		<DefaultLayout>
 			<div className="container d-flex flex-column align-items-center">
 				<div className="col col-lg-10">
-					{loadingCategoria && <Skeleton count={2} />}
-
-					{categoriaPrincipal != false && !loadingCategoria && (
-						<div className="BreadcrumContainer">
-							{categoriaPrincipal.path_from_root.map((categoria) => {
-								return (
-									<span>
-										<span key={categoria.id} className="mr-2">
-											{categoria.name}
-										</span>
-										<span className="mr-2"> > </span>
-									</span>
-								);
+					{loadingCategoria && <Skeleton count={1} />}
+					{categorias.length > 0 && !loadingCategoria && (
+						<div className="my-2">
+							{categorias.map((categoria) => {
+								return <span className="mr-3">{categoria.category_name}</span>;
 							})}
-
-							{query}
 						</div>
 					)}
 				</div>
