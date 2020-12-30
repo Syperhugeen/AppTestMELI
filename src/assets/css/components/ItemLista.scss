@@ -17,10 +17,18 @@ $IIMAGEN_TAMAÑO: 150px;
 	font-size: 18px;
 }
 
-.item-lista-img {
+.item-lista-contenedor-img {
 	width: $IIMAGEN_TAMAÑO;
 	height: $IIMAGEN_TAMAÑO;
-	object-fit: cover;
 	margin: 16px;
 	border-radius: 4px;
+	overflow: hidden;
+}
+
+.item-lista-img {
+}
+
+.item-lista-ciudad {
+	font-size: 12px;
+	color: $MELI-GRIS-2;
 }
