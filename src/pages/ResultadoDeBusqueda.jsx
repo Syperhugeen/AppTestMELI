@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
-import DefaultLayout from '../layouts/DefaultLayout';
-import ItemLista from '../components/ItemLista';
-import urlApiMeliPath from '../config/config';
-import { useParams, Link } from 'react-router-dom';
-import Axios from 'axios';
+import React, { useState, useEffect } from "react";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import DefaultLayout from "../layouts/DefaultLayout";
+import ItemLista from "../components/ItemLista";
+import urlApiMeliPath from "../config/config";
+import { useParams, Link } from "react-router-dom";
+import Axios from "axios";
 
-import '../assets/css/pages/resultadoDeBusqeda.scss';
-import '../assets/css/layouts/components/Breadcrumb.scss';
+import "../assets/css/pages/resultadoDeBusqeda.scss";
+import "../assets/css/layouts/components/Breadcrumb.scss";
 
 const ResultadoDeBusqueda = () => {
 	// Q U E R Y
-	const query = useParams().query.replace(/-/g, ' '); //SEO detalle
+	const query = useParams().query.replace(/-/g, " "); //SEO detalle
 
 	const CantidadAPedir = 10;
 
@@ -40,12 +40,14 @@ const ResultadoDeBusqueda = () => {
 			posicionOffser = 0;
 		}
 		const data = {
-			items: `${urlApiMeliPath.pathBusqueda}${query}${setParametroUrl('limit', CantidadAPedir)}${setParametroUrl(
-				'offset',
-				posicionOffser
-			)}`,
-			categorias: `${urlApiMeliPath.pathCategoriasAlBusqueda}${query}${setParametroUrl('limit', 4)}`,
-			categoriaPrincipal: `${urlApiMeliPath.pathCategoriaEspecifica}`
+			items: `${urlApiMeliPath.pathBusqueda}${query}${setParametroUrl(
+				"limit",
+				CantidadAPedir
+			)}${setParametroUrl("offset", posicionOffser)}`,
+			categorias: `${
+				urlApiMeliPath.pathCategoriasAlBusqueda
+			}${query}${setParametroUrl("limit", 4)}`,
+			categoriaPrincipal: `${urlApiMeliPath.pathCategoriaEspecifica}`,
 		};
 
 		return data;
@@ -73,7 +75,9 @@ const ResultadoDeBusqueda = () => {
 
 	const fetchCategoriaPrincipal = (categoria) => {
 		if (categoria) {
-			const url = `${setUrlRequest().categoriaPrincipal}${categoria.category_id}`;
+			const url = `${setUrlRequest().categoriaPrincipal}${
+				categoria.category_id
+			}`;
 
 			setLoadingCategoria(true);
 
@@ -143,6 +147,12 @@ const ResultadoDeBusqueda = () => {
 		fetchItems();
 	}, [query]);
 
+	useEffect(() => {
+		if (items.length === 0) {
+			setCategoriaPrincipal(categoriaPrincipal);
+		}
+	}, [items]);
+
 	return (
 		<DefaultLayout>
 			<div className="container d-flex flex-column align-items-center">
@@ -159,8 +169,8 @@ const ResultadoDeBusqueda = () => {
 												className="BreadcrumContainer-a"
 												to={`/categoria/${categoria.name
 													.toLowerCase()
-													.replace(/,/g, '')
-													.replace(/ /g, '-')}/${categoria.id}`}
+													.replace(/,/g, "")
+													.replace(/ /g, "-")}/${categoria.id}`}
 											>
 												{categoria.name}
 											</Link>
@@ -211,12 +221,16 @@ const ResultadoDeBusqueda = () => {
 
 				{!loading && items.length === 0 && (
 					<div className="h3 py-5 text-center">
-						Para encontrar algún producto mejorá la búsqueda acortando la frase 😉
+						Para encontrar algún producto mejorá la búsqueda acortando la frase
+						😉
 					</div>
 				)}
 				{!loading && items.length > 0 && (
-					<button onClick={cargarMasItems} className="btn btn-secondary btn-lg my-5">
-						Cargar más resultados
+					<button
+						onClick={cargarMasItems}
+						className="btn btn-secondary btn-lg my-5"
+					>
+						Cargar {CantidadAPedir} resultados más
 					</button>
 				)}
 			</div>

@@ -1,0 +1,44 @@
+@import "./../templateDeColores/mercadoLibreColorPaletaDefault";
+
+.item-contenedor-img {
+	max-width: 680px;
+}
+
+.item-img {
+}
+
+.item-condition-and-sold {
+	margin-top: 32px;
+	font-size: 14px;
+	margin-bottom: 16px;
+}
+
+.item-title {
+	font-size: 24px !important;
+	font-weight: bold;
+	margin-bottom: 32px;
+}
+
+.item-price {
+	font-size: 46px;
+	margin-bottom: 32px;
+}
+
+.item-contenedor-boton {
+	padding-right: 32px;
+}
+
+.item-boton {
+	background-color: $MELI-AZUL;
+	color: $MELI-BLANCO;
+	text-align: text-center;
+	border-radius: 4px;
+	width: 100%;
+	padding: 15px 0;
+	font-size: 18px;
+	border: solid 1px darken($MELI-AZUL, 20%);
+}
+
+.item-boton:hover {
+	background-color: darken($MELI-AZUL, 20%);
+}
