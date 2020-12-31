@@ -7,7 +7,7 @@ import ItemBloque from '../components/ItemBloque';
 import urlApiMeliPath from '../config/config';
 
 const CategoriaBaner = (props) => {
-	const CANTIDAD_ITEMS = 12;
+	const CANTIDAD_ITEMS = 6;
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 	const [errorBool, setErrorBool] = useState(false);
