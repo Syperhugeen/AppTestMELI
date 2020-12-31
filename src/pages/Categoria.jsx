@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from "react";
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
-import { useParams, Link } from "react-router-dom";
-import Axios from "axios";
-import useMetaTags from "react-metatags-hook";
-import DefaultLayout from "../layouts/DefaultLayout";
-import ItemLista from "../components/ItemLista";
-import urlApiMeliPath from "../config/config";
+import React, { useState, useEffect } from 'react';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import { useParams, Link } from 'react-router-dom';
+import Axios from 'axios';
+import useMetaTags from 'react-metatags-hook';
+import DefaultLayout from '../layouts/DefaultLayout';
+import ItemLista from '../components/ItemLista';
+import urlApiMeliPath from '../config/config';
 
-import "../assets/css/layouts/components/Breadcrumb.scss";
-import AppleIMG from "../assets/Imagenes/Corporativas/apple-72.png";
-import LogoOg from "../assets/Imagenes/Corporativas/logoOG.jpg";
+import '../assets/css/layouts/components/Breadcrumb.scss';
+import AppleIMG from '../assets/Imagenes/Corporativas/apple-72.png';
+import LogoOg from '../assets/Imagenes/Corporativas/logoOG.jpg';
 
 const Categoria = () => {
 	// Q U E R Y
-	const categoriaId = useParams().categoria_id.replace(/-/g, " "); //SEO detalle
+	const categoriaId = useParams().categoria_id.replace(/-/g, ' '); //SEO detalle
 
 	const CantidadAPedir = 10;
 
@@ -42,13 +42,11 @@ const Categoria = () => {
 			posicionOffser = 0;
 		}
 		const data = {
-			items: `${
-				urlApiMeliPath.pathItemsDeCategoria
-			}${categoriaId}${setParametroUrl(
-				"limit",
+			items: `${urlApiMeliPath.pathItemsDeCategoria}${categoriaId}${setParametroUrl(
+				'limit',
 				CantidadAPedir
-			)}${setParametroUrl("offset", posicionOffser)}`,
-			categoria: `${urlApiMeliPath.pathCategoriaEspecifica}${categoriaId}`,
+			)}${setParametroUrl('offset', posicionOffser)}`,
+			categoria: `${urlApiMeliPath.pathCategoriaEspecifica}${categoriaId}`
 		};
 
 		return data;
@@ -83,7 +81,7 @@ const Categoria = () => {
 				let data = response.data;
 				setCategoria(data);
 				fetchItems().then(function () {
-					console.log("se piden items");
+					console.log('se piden items');
 				});
 				setLoadingCategoria(false);
 			})
@@ -131,34 +129,34 @@ const Categoria = () => {
 			description: `Lo mejor de ${categoria.name} está en Mercado Libre. Entrá y conocé nuestras increíbles ofertas y promociones. Descubrí la mejor forma de comprar online. `,
 
 			metas: [
-				{ name: "keywords", content: `${categoria.name}` },
-				{ name: "robots", content: "index, follow" },
+				{ name: 'keywords', content: `${categoria.name}` },
+				{ name: 'robots', content: 'index, follow' },
 
-				{ name: "url", content: window.location.href },
+				{ name: 'url', content: window.location.href },
 
-				{ "http-equiv": "Cache-Control", content: "no-cache" },
+				{ 'http-equiv': 'Cache-Control', content: 'no-cache' }
 			],
 			links: [
-				{ rel: "canonical", href: window.location.href },
+				{ rel: 'canonical', href: window.location.href },
 				{
-					rel: "icon",
-					type: "image/ico",
+					rel: 'icon',
+					type: 'image/ico',
 					href:
-						"https://mlstaticquic-a.akamaihd.net/frontend-assets/ui-navigation/5.12.0/mercadolibre/favicon.svg",
+						'https://mlstaticquic-a.akamaihd.net/frontend-assets/ui-navigation/5.12.0/mercadolibre/favicon.svg'
 				},
 
 				{
-					rel: "apple-touch-icon",
-					sizes: "72x72",
-					type: "image/png",
-					href: AppleIMG,
-				},
+					rel: 'apple-touch-icon',
+					sizes: '72x72',
+					type: 'image/png',
+					href: AppleIMG
+				}
 			],
 			openGraph: {
 				title: `${categoria.name}  Mercado libre`,
 				image: LogoOg,
-				site_name: "Mercado libre",
-			},
+				site_name: 'Mercado libre'
+			}
 		},
 		[categoria]
 	);
@@ -179,8 +177,8 @@ const Categoria = () => {
 													className="BreadcrumContainer-a"
 													to={`/categoria/${categoria.name
 														.toLowerCase()
-														.replace(/,/g, "")
-														.replace(/ /g, "-")}/${categoria.id}`}
+														.replace(/,/g, '')
+														.replace(/ /g, '-')}/${categoria.id}`}
 												>
 													{categoria.name}
 												</Link>
@@ -194,7 +192,7 @@ const Categoria = () => {
 						</div>
 					)}
 				</div>
-				<div className="col col-lg-10  bg-white">
+				<div className="col col-lg-10  bg-white rounded">
 					{errorBool && (
 						<p className="text-center text-danger my-2 ">
 							Upsssssss!! Tuvimos un error de conexión.
@@ -230,10 +228,7 @@ const Categoria = () => {
 				)}
 
 				{!loading && items.length > 0 && sePuedePedirResultados && (
-					<button
-						onClick={cargarMasItems}
-						className="btn btn-secondary btn-lg my-5"
-					>
+					<button onClick={cargarMasItems} className="btn btn-secondary btn-lg my-5">
 						Cargar {CantidadAPedir} resultados más
 					</button>
 				)}

@@ -1,7 +1,23 @@
-@import "./../templateDeColores/mercadoLibreColorPaletaDefault";
+@import './../templateDeColores/mercadoLibreColorPaletaDefault';
+@import './../breakpoints/breakpoints';
+
+.item-contenedor-img-wrapper {
+	overflow: hidden;
+}
 
 .item-contenedor-img {
 	max-width: 680px;
+}
+
+@media (min-width: $lg) {
+	.item-contenedor-img {
+		width: 650px;
+		height: 650px;
+	}
+
+	.item-contenedor-img-wrapper {
+		padding-right: 40px;
+	}
 }
 
 .item-img {
@@ -11,17 +27,20 @@
 	margin-top: 32px;
 	font-size: 14px;
 	margin-bottom: 16px;
+	color: $MELI-GRIS-1;
 }
 
 .item-title {
 	font-size: 24px !important;
 	font-weight: bold;
 	margin-bottom: 32px;
+	color: $MELI-GRIS-2 !important;
 }
 
 .item-price {
 	font-size: 46px;
 	margin-bottom: 32px;
+	color: $MELI-GRIS-2 !important;
 }
 
 .item-contenedor-boton {
@@ -41,4 +60,30 @@
 
 .item-boton:hover {
 	background-color: darken($MELI-AZUL, 20%);
+}
+
+.item-description-contenedor {
+	margin-top: 64px;
+	padding: 0 16px;
+}
+
+.item-description-title {
+	font-size: 28px;
+	font-weight: 400 !important;
+	margin-bottom: 32px;
+	color: $MELI-GRIS-2 !important;
+}
+
+.item-description-contenido {
+	font-size: 16px;
+	font-weight: 400 !important;
+	color: $MELI-GRIS-1;
+	white-space: pre-line;
+}
+
+@media (min-width: $lg) {
+	.item-description-contenedor {
+		padding: 0 32px;
+		margin-top: 0px;
+	}
 }

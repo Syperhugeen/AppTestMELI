@@ -1,0 +1,35 @@
+@import '../templateDeColores/mercadoLibreColorPaletaDefault.scss';
+@import './../breakpoints/breakpoints';
+$IIMAGEN_TAMAÑO: 120px;
+
+.item-bloque-contenedor {
+	border: solid 1px $MELI-BLANCO;
+}
+
+.item-bloque-precio-contenedor {
+	margin-bottom: 32px;
+}
+
+.item-bloque-precio {
+	font-size: 18px;
+}
+
+.item-bloque-title {
+	font-size: 14px;
+}
+
+.item-bloque-contenedor-img {
+	width: $IIMAGEN_TAMAÑO;
+	height: $IIMAGEN_TAMAÑO;
+	margin: 16px;
+	border-radius: 4px;
+	overflow: hidden;
+}
+
+.item-bloque-img {
+}
+
+.item-bloque-ciudad {
+	font-size: 12px;
+	color: $MELI-GRIS-2;
+}
