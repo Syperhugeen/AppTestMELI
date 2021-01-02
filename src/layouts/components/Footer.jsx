@@ -13,7 +13,7 @@ const Footer = (props) => {
 				href="https://github.com/Syperhugeen/AppTestMELI"
 				className="btn btn-secondary  "
 			>
-				Click aquí 👉 para ir al repositorio y documentanción del proyecto
+				Click aquí 👉 para ir al repositorio y documentación del proyecto
 			</a>
 		</footer>
 	);
