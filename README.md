@@ -4,9 +4,7 @@
 
 ## Descripción y estructura del documento
 
-En este documento se detalla el trabajo realizado relacionado al challenge técnico para el desarrollo web. En la sección de Alcance se describe el desarrollo realizado de acuerdo a lo solicitado y las tecnologías utilizadas. En la sección de Estructura de directorios se detalla la estructura y contenido de las carpetas del proyecto. En la sección de Deploy se detallan los pasos para desplegar la aplicación en ambientes de desarrollo y producción. En la sección Consideraciones relacionadas a aspectos de calidad se detallan las decisiones de diseño relacionadas a los aspectos de calidad que se solicitó tener en cuenta para el desarrollo. Por último, en la sección Aspectos mejorables se detallan algunos aspectos a mejorar relacionados a la mantenibilidad, robustez y documentación (entre otros) del código
-
-generado.
+En este documento se detalla el trabajo realizado relacionado al challenge técnico para el desarrollo web. En la sección de Alcance se describe el desarrollo realizado de acuerdo a lo solicitado y las tecnologías utilizadas. En la sección de Estructura de directorios se detalla la estructura y contenido de las carpetas del proyecto. En la sección de Deploy se detallan los pasos para desplegar la aplicación en ambientes de desarrollo y producción. En la sección Consideraciones relacionadas a aspectos de calidad se detallan las decisiones de diseño relacionadas a los aspectos de calidad que se solicitó tener en cuenta para el desarrollo. Por último, en la sección Aspectos mejorables se detallan algunos aspectos a mejorar relacionados a la mantenibilidad, robustez y documentación (entre otros) del código generado.
 
 ## Alcance
 
@@ -16,7 +14,7 @@ De lo solicitado en el documento “Front-End Test Práctico.pdf” detallo a co
 
 #### Vistas
 
-Se desarrollaron todas las vistas solicitadas: **(1) Caja de búsqueda**, **(2) Resultado de búsqueda** y **(3) Detalle del producto**. Además de estas vistas, se desarrollaron 2 vistas extra: **(4) Home**, que contiene la caja de búsqueda y un conjunto de categorías de productos por las cuales se puede navegar, y **(5) Vista de categoría**, que realiza una búsqueda aplicando el filtro de la categoría seleccionada.
+Se desarrollaron todas las vistas solicitadas: **(1) Resultado de búsqueda** y **(2) Detalle del producto**. Además de estas vistas, se desarrollaron 2 vistas extra: **(3) Home**, que contiene la caja de búsqueda y un conjunto de categorías de productos por las cuales se puede navegar, y **(4) Vista de categoría**, que realiza una búsqueda aplicando el filtro de la categoría seleccionada.
 
 #### Endpoints
 
