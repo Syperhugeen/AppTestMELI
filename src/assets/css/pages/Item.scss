@@ -1,5 +1,5 @@
-@import './../templateDeColores/mercadoLibreColorPaletaDefault';
-@import './../breakpoints/breakpoints';
+@import "./../templateDeColores/mercadoLibreColorPaletaDefault";
+@import "./../breakpoints/breakpoints";
 
 .item-contenedor-img-wrapper {
 	overflow: hidden;
@@ -64,7 +64,8 @@
 
 .item-description-contenedor {
 	margin-top: 64px;
-	padding: 0 16px;
+	padding: 0 16px 32px 16px;
+	padding-bottom: 32px;
 }
 
 .item-description-title {
@@ -79,11 +80,12 @@
 	font-weight: 400 !important;
 	color: $MELI-GRIS-1;
 	white-space: pre-line;
+	margin-bottom: 0px;
 }
 
 @media (min-width: $lg) {
 	.item-description-contenedor {
-		padding: 0 32px;
+		padding: 0 32px 32px 32px;
 		margin-top: 0px;
 	}
 }

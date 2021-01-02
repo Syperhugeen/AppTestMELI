@@ -1,5 +1,6 @@
-@import '../templateDeColores/mercadoLibreColorPaletaDefault.scss';
-@import './../breakpoints/breakpoints';
+@import "../templateDeColores/mercadoLibreColorPaletaDefault.scss";
+@import "./../breakpoints/breakpoints";
+$IIMAGEN_TAMAÑO_CHICO: 100px;
 $IIMAGEN_TAMAÑO: 120px;
 
 .item-bloque-contenedor {
@@ -19,11 +20,18 @@ $IIMAGEN_TAMAÑO: 120px;
 }
 
 .item-bloque-contenedor-img {
-	width: $IIMAGEN_TAMAÑO;
-	height: $IIMAGEN_TAMAÑO;
+	width: $IIMAGEN_TAMAÑO_CHICO;
+	height: $IIMAGEN_TAMAÑO_CHICO;
 	margin: 16px;
 	border-radius: 4px;
 	overflow: hidden;
+}
+
+@media (min-width: $lg) {
+	.item-bloque-contenedor-img {
+		width: $IIMAGEN_TAMAÑO;
+		height: $IIMAGEN_TAMAÑO;
+	}
 }
 
 .item-bloque-img {

@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import useMetaTags from 'react-metatags-hook';
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
-import Axios from 'axios';
+import React, { useState, useEffect } from "react";
 
-import ItemBloque from '../components/ItemBloque';
-import urlApiMeliPath from '../config/config';
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import { Link } from "react-router-dom";
+import Axios from "axios";
+
+import ItemBloque from "../components/ItemBloque";
+import urlApiMeliPath from "../config/config";
+import validarURL from "../config/validarURL";
 
 const CategoriaBaner = (props) => {
 	const CANTIDAD_ITEMS = 6;
@@ -12,10 +14,6 @@ const CategoriaBaner = (props) => {
 	const [error, setError] = useState(null);
 	const [errorBool, setErrorBool] = useState(false);
 	const [items, setItems] = useState([]);
-
-	const setParametroUrl = (parametro, valor) => {
-		return `&${parametro}=${valor}`;
-	};
 
 	const fetchItems = () => {
 		const url = `${urlApiMeliPath.pathItemsDeCategoria}${props.categoria.id}&limit=${CANTIDAD_ITEMS}`;
@@ -40,7 +38,7 @@ const CategoriaBaner = (props) => {
 	}, []);
 
 	return (
-		<div className="row mx-0 col-11 col-lg-10 mb-5">
+		<div className="row mx-0 col-11 col-lg-10 mb-5 ">
 			{loading && (
 				<div className="col-10 my-5 ">
 					<SkeletonTheme>
@@ -51,7 +49,17 @@ const CategoriaBaner = (props) => {
 				</div>
 			)}
 			<div className="col-12 row mx-0 ">
-				<h2 className="col-12">{props.categoria.name}</h2>
+				<h2 className="col-12">
+					<Link
+						className="BreadcrumContainer-a"
+						to={`/categoria/${props.categoria.name
+							.toLowerCase()
+
+							.replace(validarURL, "-")}/${props.categoria.id}`}
+					>
+						{props.categoria.name}
+					</Link>
+				</h2>
 				{items.map((item) => {
 					return <ItemBloque item={item} key={item.id} />;
 				})}

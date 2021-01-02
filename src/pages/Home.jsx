@@ -1,15 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import useMetaTags from 'react-metatags-hook';
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
-import Axios from 'axios';
+import React, { useState, useEffect } from "react";
+import useMetaTags from "react-metatags-hook";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
-import urlApiMeliPath from '../config/config';
-import DefaultLayout from '../layouts/DefaultLayout';
-import CategoriaBaner from '../components/CategoriaBaner';
+import Axios from "axios";
 
-import '../assets/css/pages/Home.scss';
-import AppleIMG from '../assets/Imagenes/Corporativas/apple-72.png';
-import LogoOg from '../assets/Imagenes/Corporativas/logoOG.jpg';
+import urlApiMeliPath from "../config/config";
+
+import DefaultLayout from "../layouts/DefaultLayout";
+import CategoriaBaner from "../components/CategoriaBaner";
+import BanerHome from "../components/BanerHome";
+import { shuffleArrayAndReduce } from "../helpers/functions";
+
+import "../assets/css/pages/Home.scss";
+import AppleIMG from "../assets/Imagenes/Corporativas/apple-72.png";
+import LogoOg from "../assets/Imagenes/Corporativas/logoOG.jpg";
 
 const Home = () => {
 	const [loadingCategorias, setLoadingCategorias] = useState(false);
@@ -19,11 +25,11 @@ const Home = () => {
 	const fetchCategorias = () => {
 		setLoadingCategorias(true);
 
-		return Axios.get(urlApiMeliPath.pathCategoriasDelSitio)
+		return Axios(urlApiMeliPath.pathCategoriasDelSitio)
 			.then(function (response) {
 				let data = response.data;
 
-				setCategorias(data.categories);
+				setCategorias(shuffleArrayAndReduce(data.categories, 6));
 
 				setLoadingCategorias(false);
 			})
@@ -43,29 +49,34 @@ const Home = () => {
 			description: `La comunidad de compra y venta online más grande de América Latina. `,
 
 			metas: [
-				{ name: 'keywords', content: `Mercado Libre` },
-				{ name: 'robots', content: 'index, follow' },
+				{ name: "keywords", content: `Mercado Libre` },
+				{ name: "robots", content: "index, follow" },
 
-				{ name: 'url', content: window.location.href },
+				{ name: "url", content: window.location.href },
 
-				{ 'http-equiv': 'Cache-Control', content: 'no-cache' }
+				{ "http-equiv": "Cache-Control", content: "no-cache" },
 			],
 			links: [
-				{ rel: 'canonical', href: window.location.href },
+				{ rel: "canonical", href: window.location.href },
 				{
-					rel: 'icon',
-					type: 'image/ico',
+					rel: "icon",
+					type: "image/ico",
 					href:
-						'https://mlstaticquic-a.akamaihd.net/frontend-assets/ui-navigation/5.12.0/mercadolibre/favicon.svg'
+						"https://mlstaticquic-a.akamaihd.net/frontend-assets/ui-navigation/5.12.0/mercadolibre/favicon.svg",
 				},
 
-				{ rel: 'apple-touch-icon', sizes: '72x72', type: 'image/png', href: AppleIMG }
+				{
+					rel: "apple-touch-icon",
+					sizes: "72x72",
+					type: "image/png",
+					href: AppleIMG,
+				},
 			],
 			openGraph: {
 				title: ` Mercado libre`,
 				image: LogoOg,
-				site_name: 'Mercado libre'
-			}
+				site_name: "Mercado libre",
+			},
 		},
 		[]
 	);
@@ -89,6 +100,15 @@ const Home = () => {
 					</SkeletonTheme>
 				</div>
 			)}
+			<div className="w-100 d-flex align-items-center flex-column">
+				<LazyLoadImage
+					src="https://http2.mlstatic.com/optimize/o:f_webp/resources/exhibitors/MLA-especial-reyes/6ffc6db0-4944-11eb-8722-9d30f54fe8e5-home-slider_desktop.jpg"
+					alt="Baner de reyes Mercado libre"
+					className="img-fluid "
+					effect="blur"
+				/>
+			</div>
+			<BanerHome />
 			{categorias.length > 0 && !loadingCategorias && (
 				<div className="container mx-0 d-flex flex-column align-items-center py-4">
 					{categorias.map((cateogira) => {

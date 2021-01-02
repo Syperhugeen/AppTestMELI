@@ -1,0 +1,13 @@
+@import "../../templateDeColores/mercadoLibreColorPaletaDefault.scss";
+
+.footer-contenedor {
+	border-top: solid 1px lighten($MELI-GRIS-0, 30%);
+	background-color: $MELI-BLANCO;
+	padding: 80px 32px;
+}
+
+.footer-parrafo {
+	color: $MELI-GRIS-1;
+	font-size: 12px;
+	letter-spacing: 2px;
+}

@@ -1,39 +1,36 @@
-import React, { useState, useEffect } from 'react';
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
-import { useParams, Link } from 'react-router-dom';
-import Axios from 'axios';
-import useMetaTags from 'react-metatags-hook';
+import React, { useState, useEffect } from "react";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
+import { useParams, Link } from "react-router-dom";
+import Axios from "axios";
+import useMetaTags from "react-metatags-hook";
 
-import DefaultLayout from '../layouts/DefaultLayout';
-import ItemBloque from '../components/ItemBloque';
-import urlApiMeliPath from '../config/config';
+import DefaultLayout from "../layouts/DefaultLayout";
+import ItemBloque from "../components/ItemBloque";
+import urlApiMeliPath from "../config/config";
+import { setParametroUrl } from "../helpers/functions";
 
-import '../assets/css/layouts/components/Breadcrumb.scss';
-import '../assets/css/pages/Item.scss';
-import AppleIMG from '../assets/Imagenes/Corporativas/apple-72.png';
-import LogoOg from '../assets/Imagenes/Corporativas/logoOG.jpg';
+import "../assets/css/layouts/components/Breadcrumb.scss";
+import "../assets/css/pages/Item.scss";
+import AppleIMG from "../assets/Imagenes/Corporativas/apple-72.png";
+import LogoOg from "../assets/Imagenes/Corporativas/logoOG.jpg";
 
 const Item = () => {
 	// P A R A M S
-	const itemId = useParams().item_id.replace(/-/g, ' '); //SEO detalle
+	const itemId = useParams().item_id.replace(/-/g, " "); //SEO detalle
 
 	// C A N T I D A D  D E   P R O D U C T O S   R E L A C I O N A D O S   A   P E D I R
 	const CantidadAPedir = 13;
-
-	// H E L P E R S
-	const setParametroUrl = (parametro, valor) => {
-		return `&${parametro}=${valor}`;
-	};
 
 	const setUrlRequest = () => {
 		const data = {
 			item: `${urlApiMeliPath.pathItem}${itemId}`,
 			itemDescripcion: `${urlApiMeliPath.pathItem}${itemId}/description`,
 			categoria: `${urlApiMeliPath.pathCategoriaEspecifica}${item.category_id}`,
-			items: `${urlApiMeliPath.pathItemsDeCategoria}${item.category_id}${setParametroUrl(
-				'limit',
-				CantidadAPedir
-			)}`
+			items: `${urlApiMeliPath.pathItemsDeCategoria}${
+				item.category_id
+			}${setParametroUrl("limit", CantidadAPedir)}`,
 		};
 
 		return data;
@@ -150,34 +147,34 @@ const Item = () => {
 			description: `Lo mejor de ${item.title} está en Mercado Libre. Entrá y conocé nuestras increíbles ofertas y promociones. Descubrí la mejor forma de comprar online. `,
 
 			metas: [
-				{ name: 'keywords', content: `${item.title}` },
-				{ name: 'robots', content: 'index, follow' },
+				{ name: "keywords", content: `${item.title}` },
+				{ name: "robots", content: "index, follow" },
 
-				{ name: 'url', content: window.location.href },
+				{ name: "url", content: window.location.href },
 
-				{ 'http-equiv': 'Cache-Control', content: 'no-cache' }
+				{ "http-equiv": "Cache-Control", content: "no-cache" },
 			],
 			links: [
-				{ rel: 'canonical', href: window.location.href },
+				{ rel: "canonical", href: window.location.href },
 				{
-					rel: 'icon',
-					type: 'image/ico',
+					rel: "icon",
+					type: "image/ico",
 					href:
-						'https://mlstaticquic-a.akamaihd.net/frontend-assets/ui-navigation/5.12.0/mercadolibre/favicon.svg'
+						"https://mlstaticquic-a.akamaihd.net/frontend-assets/ui-navigation/5.12.0/mercadolibre/favicon.svg",
 				},
 
 				{
-					rel: 'apple-touch-icon',
-					sizes: '72x72',
-					type: 'image/png',
-					href: AppleIMG
-				}
+					rel: "apple-touch-icon",
+					sizes: "72x72",
+					type: "image/png",
+					href: AppleIMG,
+				},
 			],
 			openGraph: {
 				title: `${item.title}  Mercado libre`,
 				image: LogoOg,
-				site_name: 'Mercado libre'
-			}
+				site_name: "Mercado libre",
+			},
 		},
 		[item]
 	);
@@ -198,8 +195,8 @@ const Item = () => {
 													className="BreadcrumContainer-a"
 													to={`/categoria/${categoria.name
 														.toLowerCase()
-														.replace(/,/g, '')
-														.replace(/ /g, '-')}/${categoria.id}`}
+														.replace(/,/g, "")
+														.replace(/ /g, "-")}/${categoria.id}`}
 												>
 													{categoria.name}
 												</Link>
@@ -245,23 +242,26 @@ const Item = () => {
 						<div className="w-100 row mx-0">
 							<div className="col-12 col-lg-8 d-flex flex-column align-items-center justify-content-center item-contenedor-img-wrapper ">
 								<div className="item-contenedor-img d-flex flex-column align-items-center justify-content-center ">
-									<img
+									<LazyLoadImage
 										src={item.pictures[0].url}
 										alt={`Foto principal del artículo ${item.title}`}
 										className="item-img"
+										effect="blur"
 									/>
 								</div>
 							</div>
 							<div className="col-12 col-lg-4">
 								<div className="item-condition-and-sold">
-									{`${item.condition === 'new' ? 'Nuevo' : ''} ${
-										item.sold_quantity > 0 ? item.sold_quantity : ''
-									}  ${item.sold_quantity == 1 ? 'Vendida' : ''}
-								${item.sold_quantity > 1 ? 'Vendidas' : ''}`}
+									{`${item.condition === "new" ? "Nuevo" : ""} ${
+										item.sold_quantity > 0 ? item.sold_quantity : ""
+									}  ${item.sold_quantity == 1 ? "Vendida" : ""}
+								${item.sold_quantity > 1 ? "Vendidas" : ""}`}
 								</div>
 								<h1 className="item-title">{item.title}</h1>
 								<div className="item-price">
-									{`${item.currency_id === 'USD' ? item.currency_id : '$'} ${item.price}`}
+									{`${item.currency_id === "USD" ? item.currency_id : "$"} ${
+										item.price
+									}`}
 								</div>
 								<div className="item-contenedor-boton">
 									<button className="item-boton">Comprar</button>
@@ -281,7 +281,7 @@ const Item = () => {
 					)}
 
 					{!loadingDescripcion && description !== false && (
-						<div className="w-100 item-description-contenedor">
+						<div className="w-100 item-description-contenedor ">
 							<h2 className="item-description-title">Descripción</h2>
 							<p className="item-description-contenido">{description}</p>
 						</div>
@@ -289,12 +289,18 @@ const Item = () => {
 				</div>
 
 				{!loading && items.length > 0 && (
-					<div className="col col-lg-10 ">
-						<h3 className="item-description-title">También te podría interesar...</h3>
+					<div className="col col-lg-10 mb-5">
+						<h3 className="item-description-title">
+							También te podría interesar...
+						</h3>
 						{items.length > 0 && (
 							<div className="row mx-0">
 								{items.map((item) => {
-									return itemId != item.id && <ItemBloque item={item} key={item.id} />;
+									return (
+										itemId != item.id && (
+											<ItemBloque item={item} key={item.id} />
+										)
+									);
 								})}
 							</div>
 						)}

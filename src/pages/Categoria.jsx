@@ -1,30 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
-import { useParams, Link } from 'react-router-dom';
-import Axios from 'axios';
-import useMetaTags from 'react-metatags-hook';
-import DefaultLayout from '../layouts/DefaultLayout';
-import ItemLista from '../components/ItemLista';
-import urlApiMeliPath from '../config/config';
+import React, { useState, useEffect } from "react";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import { useParams, Link } from "react-router-dom";
+import Axios from "axios";
+import useMetaTags from "react-metatags-hook";
+import DefaultLayout from "../layouts/DefaultLayout";
+import ItemLista from "../components/ItemLista";
+import urlApiMeliPath from "../config/config";
+import validarURL from "../config/validarURL";
+import { setParametroUrl } from "../helpers/functions";
 
-import '../assets/css/layouts/components/Breadcrumb.scss';
-import AppleIMG from '../assets/Imagenes/Corporativas/apple-72.png';
-import LogoOg from '../assets/Imagenes/Corporativas/logoOG.jpg';
+import "../assets/css/layouts/components/Breadcrumb.scss";
+import AppleIMG from "../assets/Imagenes/Corporativas/apple-72.png";
+import LogoOg from "../assets/Imagenes/Corporativas/logoOG.jpg";
 
 const Categoria = () => {
 	// Q U E R Y
-	const categoriaId = useParams().categoria_id.replace(/-/g, ' '); //SEO detalle
+	const categoriaId = useParams().categoria_id.replace(/-/g, " "); //SEO detalle
 
 	const CantidadAPedir = 10;
 
-	// H E L P E R S
-	const setParametroUrl = (parametro, valor) => {
-		return `&${parametro}=${valor}`;
-	};
-
 	const validarPedirMas = (paging) => {
 		if (items.length + CantidadAPedir < paging.primary_results) {
-			if (items.length == 0) {
+			if (items.length === 0) {
 				setOffset(CantidadAPedir);
 			} else {
 				setOffset(CantidadAPedir + offset);
@@ -36,17 +33,19 @@ const Categoria = () => {
 
 	const setUrlRequest = () => {
 		let posicionOffser = 0;
-		if (categoriaId == categoriaIdAnterior) {
+		if (categoriaId === categoriaIdAnterior) {
 			posicionOffser = items.length;
 		} else {
 			posicionOffser = 0;
 		}
 		const data = {
-			items: `${urlApiMeliPath.pathItemsDeCategoria}${categoriaId}${setParametroUrl(
-				'limit',
+			items: `${
+				urlApiMeliPath.pathItemsDeCategoria
+			}${categoriaId}${setParametroUrl(
+				"limit",
 				CantidadAPedir
-			)}${setParametroUrl('offset', posicionOffser)}`,
-			categoria: `${urlApiMeliPath.pathCategoriaEspecifica}${categoriaId}`
+			)}${setParametroUrl("offset", posicionOffser)}`,
+			categoria: `${urlApiMeliPath.pathCategoriaEspecifica}${categoriaId}`,
 		};
 
 		return data;
@@ -80,9 +79,7 @@ const Categoria = () => {
 			.then(function (response) {
 				let data = response.data;
 				setCategoria(data);
-				fetchItems().then(function () {
-					console.log('se piden items');
-				});
+				fetchItems().then(function () {});
 				setLoadingCategoria(false);
 			})
 			.catch(function (error) {
@@ -100,7 +97,7 @@ const Categoria = () => {
 			.then(function (response) {
 				let data = response.data;
 
-				if (categoriaId == categoriaIdAnterior) {
+				if (categoriaId === categoriaIdAnterior) {
 					setItems(items.concat(data.results));
 				} else {
 					setItems(data.results);
@@ -129,34 +126,34 @@ const Categoria = () => {
 			description: `Lo mejor de ${categoria.name} está en Mercado Libre. Entrá y conocé nuestras increíbles ofertas y promociones. Descubrí la mejor forma de comprar online. `,
 
 			metas: [
-				{ name: 'keywords', content: `${categoria.name}` },
-				{ name: 'robots', content: 'index, follow' },
+				{ name: "keywords", content: `${categoria.name}` },
+				{ name: "robots", content: "index, follow" },
 
-				{ name: 'url', content: window.location.href },
+				{ name: "url", content: window.location.href },
 
-				{ 'http-equiv': 'Cache-Control', content: 'no-cache' }
+				{ "http-equiv": "Cache-Control", content: "no-cache" },
 			],
 			links: [
-				{ rel: 'canonical', href: window.location.href },
+				{ rel: "canonical", href: window.location.href },
 				{
-					rel: 'icon',
-					type: 'image/ico',
+					rel: "icon",
+					type: "image/ico",
 					href:
-						'https://mlstaticquic-a.akamaihd.net/frontend-assets/ui-navigation/5.12.0/mercadolibre/favicon.svg'
+						"https://mlstaticquic-a.akamaihd.net/frontend-assets/ui-navigation/5.12.0/mercadolibre/favicon.svg",
 				},
 
 				{
-					rel: 'apple-touch-icon',
-					sizes: '72x72',
-					type: 'image/png',
-					href: AppleIMG
-				}
+					rel: "apple-touch-icon",
+					sizes: "72x72",
+					type: "image/png",
+					href: AppleIMG,
+				},
 			],
 			openGraph: {
 				title: `${categoria.name}  Mercado libre`,
 				image: LogoOg,
-				site_name: 'Mercado libre'
-			}
+				site_name: "Mercado libre",
+			},
 		},
 		[categoria]
 	);
@@ -177,8 +174,7 @@ const Categoria = () => {
 													className="BreadcrumContainer-a"
 													to={`/categoria/${categoria.name
 														.toLowerCase()
-														.replace(/,/g, '')
-														.replace(/ /g, '-')}/${categoria.id}`}
+														.replace(validarURL, "-")}/${categoria.id}`}
 												>
 													{categoria.name}
 												</Link>
@@ -228,7 +224,10 @@ const Categoria = () => {
 				)}
 
 				{!loading && items.length > 0 && sePuedePedirResultados && (
-					<button onClick={cargarMasItems} className="btn btn-secondary btn-lg my-5">
+					<button
+						onClick={cargarMasItems}
+						className="btn btn-secondary btn-lg my-5"
+					>
 						Cargar {CantidadAPedir} resultados más
 					</button>
 				)}
