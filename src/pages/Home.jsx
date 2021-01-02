@@ -101,11 +101,10 @@ const Home = () => {
 				</div>
 			)}
 			<div className="w-100 d-flex align-items-center flex-column">
-				<LazyLoadImage
+				<img
 					src="https://http2.mlstatic.com/optimize/o:f_webp/resources/exhibitors/MLA-especial-reyes/6ffc6db0-4944-11eb-8722-9d30f54fe8e5-home-slider_desktop.jpg"
 					alt="Baner de reyes Mercado libre"
 					className="img-fluid "
-					effect="blur"
 				/>
 			</div>
 			<BanerHome />

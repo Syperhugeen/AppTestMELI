@@ -283,7 +283,7 @@ const Item = () => {
 					{!loadingDescripcion && description !== false && (
 						<div className="w-100 item-description-contenedor ">
 							<h2 className="item-description-title">Descripción</h2>
-							<p className="item-description-contenido">{description}</p>
+							<p className="item-description-contenido ">{description}</p>
 						</div>
 					)}
 				</div>
