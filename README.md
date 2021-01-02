@@ -8,28 +8,26 @@ En este documento se detalla el trabajo realizado relacionado al challenge técn
 
 generado.
 
-### Alcance
+## Alcance
 
 De lo solicitado en el documento “Front-End Test Práctico.pdf” detallo a continuación lo desarrollado tanto del lado del cliente como del servidor.
 
-#### Cliente
+### Cliente
 
-##### Vistas
+#### Vistas
 
-Se desarrollaron todas las vistas solicitadas: **(1) Caja de búsqueda**, **(2) Resultado de búsqueda** y **(3) Detalle del producto**. Además de estas vistas, se desarrollaron 2 vistas extra : **(4) Home**, que contiene la caja de búsqueda y un conjunto de categorías de productos por las cuales se puede navegar, y **(5) Vista de categoría**, que realiza una búsqueda aplicando el filtro de la categoría seleccionada.
+Se desarrollaron todas las vistas solicitadas: **(1) Caja de búsqueda**, **(2) Resultado de búsqueda** y **(3) Detalle del producto**. Además de estas vistas, se desarrollaron 2 vistas extra: **(4) Home**, que contiene la caja de búsqueda y un conjunto de categorías de productos por las cuales se puede navegar, y **(5) Vista de categoría**, que realiza una búsqueda aplicando el filtro de la categoría seleccionada.
 
-##### Endpoints
+#### Endpoints
 
 A continuación se detallan los endpoints para cada vista. En particular, no hay un endpoint para la caja de búsqueda, el equivalente sería el Home en la aplicación desarrollada. La caja de búsqueda en sí, se encuentra integrada en todas las vistas.
 
-2. **Resultado de búsqueda: [**https://appmeli.worldmaster.com.uy/items/search/celulares](https://appmeli.worldmaster.com.uy/items/search/celulares)**
-3. **Detalle del producto: [**https://appmeli.worldmaster.com.uy/item/lg-k50-32-gb-aurora-black-3-gb-ram/MLA89 8423182](https://appmeli.worldmaster.com.uy/item/lg-k50-32-gb-aurora-black-3-gb-ram/MLA898423182)\*\*
-4. **Home: [**https://appmeli.worldmaster.com.uy/](https://appmeli.worldmaster.com.uy/)**
-5. **Vista de categoría: [**https://appmeli.worldmaster.com.uy/categoria/celulares-y-tel%C3%A9fonos/MLA105](https://appmeli.worldmaster.com.uy/categoria/celulares-y-tel%C3%A9fonos/MLA1051)**
+1. **Resultado de búsqueda: [**https://appmeli.worldmaster.com.uy/items/search/celulares](https://appmeli.worldmaster.com.uy/items/search/celulares)**
+2. **Detalle del producto: [**https://appmeli.worldmaster.com.uy/item/lg-k50-32-gb-aurora-black-3-gb-ram/MLA898423182](https://appmeli.worldmaster.com.uy/item/lg-k50-32-gb-aurora-black-3-gb-ram/MLA898423182)**
+3. **Home:** [\*\*https://appmeli.worldmaster.com.uy/](https://appmeli.worldmaster.com.uy/)\*\*
+4. **Vista de categoría: [**https://appmeli.worldmaster.com.uy/categoria/celulares-y-tel%C3%A9fonos/MLA105](https://appmeli.worldmaster.com.uy/categoria/celulares-y-tel%C3%A9fonos/MLA1051)**
 
-[1](https://appmeli.worldmaster.com.uy/categoria/celulares-y-tel%C3%A9fonos/MLA1051)
-
-#### Servidor
+### Servidor
 
 No fue necesario implementar lógica del lado del servidor ya que la aplicación es del tipo _single-page application,_ lo cual permite contar con un sistema de enrutamiento (endpoints) sin necesidad de consultar a un servidor. Esto brinda una experiencia de usuario más fluida (la página no se recarga por completo).
 
@@ -37,7 +35,7 @@ Se instaló y configuró la librería Express con el fin de ejecutar el script _
 
 Para poder enviar un link con el proyecto en producción, el mismo quedó deployado y en funcionamiento en un servidor apache, accesible a través de la siguiente ruta: <https://appmeli.worldmaster.com.uy/>. Usé apache porque era lo que tenía disponible.
 
-### Tecnologías utilizadas
+## Tecnologías utilizadas
 
 - HTML
 - React, específicamente el paquete Creat-react-app.
@@ -46,7 +44,7 @@ Para poder enviar un link con el proyecto en producción, el mismo quedó deploy
 
 Por más información de librerías utilizadas consultar el archivo package.json.
 
-### Estructura de directorios
+## Estructura de directorios
 
 La carpeta que contiene todo el código fuente de la aplicación es **_src/_** y se estructura de la siguiente forma:
 
@@ -62,11 +60,11 @@ La carpeta que contiene todo el código fuente de la aplicación es **_src/_** y
 - _App.js_: contiene las rutas de la aplicación.
 - _App.test.js_: contiene los test para las pruebas unitarias (no están implementados)
 
-### Deploy
+## Deploy
 
 Dependiendo del ambiente en el cual se vaya a deployar la aplicación, seguir los pasos detallados a continuación.
 
-#### Ambiente de desarrollo
+### Ambiente de desarrollo
 
 Pasos a seguir:
 
@@ -74,7 +72,7 @@ Pasos a seguir:
 1. Ejecutar el comando **npm install** dentro de la carpeta del repositorio
 1. Crear servidor de desarrollo con **npm start**
 
-#### Ambiente de producción
+### Ambiente de producción
 
 Pasos a seguir
 
@@ -84,7 +82,7 @@ Pasos a seguir
 1. Si se usa un servidor de producción con Node, ejecutar el comando **git pull** en ese entorno. Y actualizar el archivo .gitignore para que no trakee _/build_.
 1. En el caso de un servidor con NODE ejecutar el comando **node server.js** el cual creará un servidor con EXPRESS el cual ya está configurado.
 
-### Consideraciones relacionadas a aspectos de calidad
+## Consideraciones relacionadas a aspectos de calidad
 
 **Usabilidad**
 
@@ -109,9 +107,9 @@ Pasos a seguir
 - Ahorro de consulta al servidor por ser _single-page application_.
 - Buen rendimiento de acuerdo a [PageSpeed ](https://developers.google.com/speed)de Google (mejorable)
 
-![](Test%20Práctico%20-%20Frontend%20MELI%202020.001.png)
+![](<Test%20Práctico%20-%20Frontend%20MELI%202020%20(1).001.png>)
 
-![](Test%20Práctico%20-%20Frontend%20MELI%202020.002.png)
+![](<Test%20Práctico%20-%20Frontend%20MELI%202020%20(1).002.png>)
 
 **Escalabilidad**
 
@@ -119,7 +117,7 @@ Pasos a seguir
 - Fácil incorporación de nuevos componentes.
 - Cambios de estilo de forma fácil a través de archivos de estilo.
 
-### Aspectos mejorables
+## Aspectos mejorables
 
 Debido a que es la primera vez que utilizo React, el aprendizaje de la nueva tecnología y el desarrollo se realizó de forma paralela, por lo que el desarrollo de los primeros componentes y la estructuración del código dista de lo óptimo.
 
