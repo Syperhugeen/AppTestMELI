@@ -1,6 +1,6 @@
 @import "../templateDeColores/mercadoLibreColorPaletaDefault.scss";
 @import "./../breakpoints/breakpoints";
-$IIMAGEN_TAMAÑO_CHICO: 100px;
+$IIMAGEN_TAMAÑO_CHICO: 90px;
 $IIMAGEN_TAMAÑO: 120px;
 
 .item-bloque-contenedor {
@@ -12,7 +12,13 @@ $IIMAGEN_TAMAÑO: 120px;
 }
 
 .item-bloque-precio {
-	font-size: 18px;
+	font-size: 14px;
+}
+
+@media (min-width: $lg) {
+	.item-bloque-precio {
+		font-size: 18px;
+	}
 }
 
 .item-bloque-title {

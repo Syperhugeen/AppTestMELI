@@ -38,7 +38,7 @@ const CategoriaBaner = (props) => {
 	}, []);
 
 	return (
-		<div className="row mx-0 col-11 col-lg-10 mb-5 ">
+		<div className="row mx-0 col-12 col-lg-10 mb-5 ">
 			{loading && (
 				<div className="col-10 my-5 ">
 					<SkeletonTheme>

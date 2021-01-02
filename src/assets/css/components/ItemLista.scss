@@ -1,12 +1,27 @@
-@import '../templateDeColores/mercadoLibreColorPaletaDefault.scss';
-$IIMAGEN_TAMAÑO: 150px;
+@import "../templateDeColores/mercadoLibreColorPaletaDefault.scss";
+@import "./../breakpoints/breakpoints";
+$IIMAGEN_TAMAÑO: 100px;
+$IIMAGEN_TAMAÑO_GRANDE: 150px;
 
 .item-lista-contenedor {
 	border-bottom: solid 1px $MELI-BLANCO;
+	padding: 16px 0px 16px 0px !important;
+}
+
+@media (min-width: $lg) {
+	.item-lista-contenedor {
+		padding: 0px !important;
+	}
 }
 
 .item-lista-precio-contenedor {
-	margin-bottom: 32px;
+	margin-bottom: 12px;
+}
+
+@media (min-width: $lg) {
+	.item-lista-precio-contenedor {
+		margin-bottom: 32px;
+	}
 }
 
 .item-lista-precio {
@@ -23,6 +38,13 @@ $IIMAGEN_TAMAÑO: 150px;
 	margin: 16px;
 	border-radius: 4px;
 	overflow: hidden;
+}
+
+@media (min-width: $lg) {
+	.item-lista-contenedor-img {
+		width: $IIMAGEN_TAMAÑO_GRANDE;
+		height: $IIMAGEN_TAMAÑO_GRANDE;
+	}
 }
 
 .item-lista-img {

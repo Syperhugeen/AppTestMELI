@@ -49,7 +49,7 @@ const ItemBloque = (props) => {
 									.toLowerCase()
 									.replace(validarURL, "-")}/${item.id}`}
 							>
-								<h2 className="item-bloque-title  ">
+								<h2 className="item-bloque-title text-wrap ">
 									{getNameArreglado(item.title)}{" "}
 								</h2>
 							</Link>
