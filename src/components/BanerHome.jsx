@@ -21,7 +21,7 @@ const BanerHome = () => {
 			.then(function (response) {
 				let data = response.data;
 
-				setCategorias(shuffleArrayAndReduce(data.categories, 6));
+				setCategorias(shuffleArrayAndReduce(data.categories, 12));
 
 				setLoadingCategorias(false);
 			})
