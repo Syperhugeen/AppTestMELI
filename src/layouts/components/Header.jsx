@@ -16,7 +16,7 @@ const Header = (props) => {
 	}, [width]);
 
 	return (
-		<header className="w-100 bg-primary py-2 ">
+		<header id="header-nav" className="w-100 bg-primary py-2 ">
 			<div className="container d-flex flex-column align-items-center">
 				<div className="col col-lg-10 row mx-0 ">
 					<div className="col-2  col-lg-1 d-flex flex-column align-items-center justify-content-center px-1">

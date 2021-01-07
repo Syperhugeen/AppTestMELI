@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { useParams, Link } from "react-router-dom";
 import Axios from "axios";
+import useMetaTags from "react-metatags-hook";
+
 import DefaultLayout from "../layouts/DefaultLayout";
 import ItemLista from "../components/ItemLista";
 import urlApiMeliPath from "../config/config";
@@ -9,6 +11,9 @@ import { setParametroUrl } from "../helpers/functions";
 
 import "../assets/css/pages/resultadoDeBusqeda.scss";
 import "../assets/css/layouts/components/Breadcrumb.scss";
+
+import AppleIMG from "../assets/Imagenes/Corporativas/apple-72.png";
+import LogoOg from "../assets/Imagenes/Corporativas/logoOG.jpg";
 
 const ResultadoDeBusqueda = () => {
 	// Q U E R Y
@@ -138,7 +143,48 @@ const ResultadoDeBusqueda = () => {
 			});
 	};
 
+	useMetaTags(
+		{
+			title: `Buscando "${query}" en  Mercado libre`,
+			description: `Lo mejor de ${query} está en Mercado Libre. Entrá y conocé nuestras increíbles ofertas y promociones. Descubrí la mejor forma de comprar online. `,
+
+			metas: [
+				{ name: "keywords", content: `${query}` },
+				{ name: "robots", content: "index, follow" },
+
+				{ name: "url", content: window.location.href },
+
+				{ "http-equiv": "Cache-Control", content: "no-cache" },
+			],
+			links: [
+				{ rel: "canonical", href: window.location.href },
+				{
+					rel: "icon",
+					type: "image/ico",
+					href:
+						"https://mlstaticquic-a.akamaihd.net/frontend-assets/ui-navigation/5.12.0/mercadolibre/favicon.svg",
+				},
+
+				{
+					rel: "apple-touch-icon",
+					sizes: "72x72",
+					type: "image/png",
+					href: AppleIMG,
+				},
+			],
+			openGraph: {
+				title: `Buscando "${query}" en  Mercado libre`,
+				image: LogoOg,
+				site_name: "Mercado libre",
+			},
+		},
+		[query]
+	);
+
 	useEffect(() => {
+		if (window.scrollY) {
+			window.scroll(0, 0);
+		}
 		fetchCategorias();
 		fetchItems();
 	}, [query]);

@@ -7,6 +7,18 @@ $IIMAGEN_TAMAÑO: 120px;
 	border: solid 1px $MELI-BLANCO;
 }
 
+.item-bloque-sub-contenedor {
+	box-shadow: 0px 1px 11px 0px rgba(54, 54, 54, 0.1);
+	-webkit-box-shadow: 0px 1px 11px 0px rgba(54, 54, 54, 0.1);
+	-moz-box-shadow: 0px 1px 11px 0px rgba(54, 54, 54, 0.1);
+}
+
+.item-bloque-sub-contenedor:hover {
+	box-shadow: 0px 1px 11px 0px rgba(54, 54, 54, 0.45);
+	-webkit-box-shadow: 0px 1px 11px 0px rgba(54, 54, 54, 0.45);
+	-moz-box-shadow: 0px 1px 11px 0px rgba(54, 54, 54, 0.45);
+}
+
 .item-bloque-precio-contenedor {
 	margin-bottom: 32px;
 }
@@ -28,7 +40,7 @@ $IIMAGEN_TAMAÑO: 120px;
 .item-bloque-contenedor-img {
 	width: $IIMAGEN_TAMAÑO_CHICO;
 	height: $IIMAGEN_TAMAÑO_CHICO;
-	margin: 16px;
+	margin: 8px 16px;
 	border-radius: 4px;
 	overflow: hidden;
 }

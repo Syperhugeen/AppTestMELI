@@ -8,6 +8,7 @@ import useMetaTags from "react-metatags-hook";
 
 import DefaultLayout from "../layouts/DefaultLayout";
 import ItemBloque from "../components/ItemBloque";
+import BotonComprarFlotante from "../components/BotonComprarFlotante";
 import urlApiMeliPath from "../config/config";
 import { setParametroUrl } from "../helpers/functions";
 
@@ -181,6 +182,7 @@ const Item = () => {
 
 	return (
 		<DefaultLayout>
+			<BotonComprarFlotante item={item} />
 			<div className="container d-flex flex-column align-items-center">
 				<div className="col col-lg-10">
 					{loadingCategoria && <Skeleton count={1} />}
@@ -263,7 +265,7 @@ const Item = () => {
 										item.price
 									}`}
 								</div>
-								<div className="item-contenedor-boton">
+								<div id="boton-comprar" className="item-contenedor-boton">
 									<button className="item-boton">Comprar</button>
 								</div>
 							</div>

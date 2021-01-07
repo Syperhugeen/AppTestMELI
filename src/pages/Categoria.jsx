@@ -117,6 +117,9 @@ const Categoria = () => {
 	};
 
 	useEffect(() => {
+		if (window.scrollY) {
+			window.scroll(0, 0);
+		}
 		fetchCategoriaPrincipal().then(function () {});
 	}, [categoriaId]);
 

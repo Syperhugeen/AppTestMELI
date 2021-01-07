@@ -32,7 +32,7 @@ const ItemBloque = (props) => {
 					item.id
 				}`}
 			>
-				<div className="w-100 bg-white rounded  d-flex flex-column  align-items-center h-100">
+				<div className="item-bloque-sub-contenedor w-100 bg-white rounded  d-flex flex-column  align-items-center h-100">
 					<div className="item-bloque-contenedor-img d-flex flex-row align-items-center justify-content-center  mb-2">
 						<LazyLoadImage
 							src={item.thumbnail}

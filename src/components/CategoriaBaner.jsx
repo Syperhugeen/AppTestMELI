@@ -19,8 +19,6 @@ const CategoriaBaner = (props) => {
 		const url = `${urlApiMeliPath.pathItemsDeCategoria}${props.categoria.id}&limit=${CANTIDAD_ITEMS}`;
 		setLoading(true);
 
-		console.log(props.categoria.name);
-
 		return Axios.get(url)
 			.then(function (response) {
 				setItems(response.data.results);
@@ -49,7 +47,7 @@ const CategoriaBaner = (props) => {
 				</div>
 			)}
 			<div className="col-12 row mx-0 ">
-				<h2 className="col-12">
+				<h2 className="col-12 h4">
 					<Link
 						className="BreadcrumContainer-a"
 						to={`/categoria/${props.categoria.name

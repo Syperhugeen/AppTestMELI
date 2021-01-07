@@ -9,6 +9,8 @@ import Axios from "axios";
 import urlApiMeliPath from "../config/config";
 import validarURL from "../config/validarURL";
 
+import "../assets/css/components/CategoriaCabecera.scss";
+
 import categoriaElse from "../assets/Imagenes/Corporativas/categoriaELSE.png";
 
 const CategoriaCabecera = (props) => {
@@ -63,7 +65,7 @@ const CategoriaCabecera = (props) => {
 									categoria.picture != null ? categoria.picture : categoriaElse
 								}
 								alt={`Foto de categoria ${categoria.name}`}
-								className="img-fluid rounded-circle bg-white "
+								className="img-fluid rounded-circle bg-white categoria-cavecera-contenedor-imagen "
 								effect="blur"
 							/>
 						</Link>
